@@ -1,5 +1,7 @@
 package com.mkyong.web.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloController {
+	
+	@RequestMapping(value = "/rest", method = RequestMethod.GET)
+	public ResponseEntity<String> rest() {
+		return new ResponseEntity<String>("Some data", HttpStatus.OK);
+	}
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
@@ -33,7 +40,8 @@ public class HelloController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+	public ModelAndView login(
+			@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
 
 		ModelAndView model = new ModelAndView();
