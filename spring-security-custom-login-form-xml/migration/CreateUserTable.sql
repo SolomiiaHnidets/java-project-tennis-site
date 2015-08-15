@@ -1,32 +1,15 @@
-USE [Tennis]
-GO
 
-/****** Object:  Table [dbo].[Users]    Script Date: 07/27/2015 23:43:50 ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+-- DROP TABLE "Users";
 
-CREATE TABLE [dbo].[Users](
-	[UserID] [int] IDENTITY(1,1) NOT NULL,
-	[UserName] [nvarchar](200) NOT NULL,
-	[Password] [nvarchar](200) NOT NULL,
-	[EmailAddress] [nvarchar](200) NOT NULL,
-	[CreateDate] [datetime] NULL,
- CONSTRAINT [PK_User_UserID] PRIMARY KEY CLUSTERED 
+CREATE TABLE "Users"
 (
-	[UserID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [UQ_Users] UNIQUE NONCLUSTERED 
-(
-	[UserName] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [dbo].[Users] ADD  DEFAULT (getdate()) FOR [CreateDate]
-GO
-
+  username character varying(400),
+  password character varying(30),
+  email character varying(100),
+  "birthDate" date,
+  profession character varying(100),
+  sex character(1),
+  "userID" numeric
+)
 
