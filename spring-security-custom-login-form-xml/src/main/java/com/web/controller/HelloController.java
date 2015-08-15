@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import com.dao.model.User;
+import com.db.dao.UserDAO;;
 
 @Controller
 public class HelloController {
@@ -18,9 +20,6 @@ public class HelloController {
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
-
-		
-		
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is welcome page!");
@@ -50,13 +49,19 @@ public class HelloController {
 		if (error != null) {
 			model.addObject("error", "Invalid username and password!");
 		}
-
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");
 		}
 		model.setViewName("login");
-
 		return model;
+
+	}
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ResponseEntity<String> show(
+			@RequestParam(value = "id", required = true) int id) {
+		UserDAO userDAO = new UserDAO();
+		User user = userDAO.getById(id);
+		return new ResponseEntity<String>(user.getUserName(), HttpStatus.OK);
 
 	}
 
