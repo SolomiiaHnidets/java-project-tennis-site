@@ -11,11 +11,11 @@
 
  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
   <property name="driverClassName" value="org.postgresql.Driver"/>
-  <property name="url" value="jdbc:postgresql://localhost:5432;database=WebSite;"/>
+  <property name="url" value="jdbc:postgresql://localhost:5432/WebSite"/>
   <property name="username" value="postgres"/>
   <property name="password" value="solka1627"/>
  </bean>
 
- <bean class="com.db.dao.UserDAO"></bean>
+ <bean class="com.db.dao.implementation.UserDAOjdbc"></bean>
 
 </beans>

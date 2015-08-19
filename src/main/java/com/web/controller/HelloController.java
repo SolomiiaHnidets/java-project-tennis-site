@@ -1,7 +1,8 @@
 package com.web.controller;
 
 import com.dao.model.User;
-import com.db.dao.UserDAO;
+import com.db.dao.implementation.UserDAOjdbc;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -60,7 +61,7 @@ public class HelloController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ResponseEntity<String> show(
 			@RequestParam(value = "id", required = true) int id) {
-		UserDAO userDAO = new UserDAO();
+		UserDAOjdbc userDAO = new UserDAOjdbc();
 		User user = userDAO.getById(id);
 		return new ResponseEntity<String>(user.getUserName(), HttpStatus.OK);
 
