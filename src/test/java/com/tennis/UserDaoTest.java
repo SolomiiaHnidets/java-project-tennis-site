@@ -1,7 +1,7 @@
 package com.tennis;
 
-import com.dao.model.User;
-import com.db.dao.implementation.UserDAOjdbc;
+import com.tennis.domain.User;
+import com.tennis.persistent.UserDAO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserDaoTest {
 
 	@Autowired
-	private UserDAOjdbc userDAO;
+	private UserDAO userDAO;
 
 	@Test
 	public void testGetById() {
@@ -28,6 +28,6 @@ public class UserDaoTest {
 		user.setUserName("uran");
 		user.setPassword("password");
 		user.setEmail("some@www");
-		userDAO.insertUser(user);
+		userDAO.create(user);
 	}
 }

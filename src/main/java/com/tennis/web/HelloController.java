@@ -1,24 +1,23 @@
-package com.web.controller;
+package com.tennis.web;
 
+
+import com.tennis.domain.User;
+import com.tennis.persistent.UserDAOjdbc;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import com.dao.model.User;
-import com.db.dao.UserDAO;;
 
 @Controller
 public class HelloController {
-	
+
 	@RequestMapping(value = "/rest", method = RequestMethod.GET)
 	public ResponseEntity<String> rest() {
 		return new ResponseEntity<String>("Some data", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
@@ -56,10 +55,11 @@ public class HelloController {
 		return model;
 
 	}
+
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ResponseEntity<String> show(
 			@RequestParam(value = "id", required = true) int id) {
-		UserDAO userDAO = new UserDAO();
+		UserDAOjdbc userDAO = new UserDAOjdbc();
 		User user = userDAO.getById(id);
 		return new ResponseEntity<String>(user.getUserName(), HttpStatus.OK);
 

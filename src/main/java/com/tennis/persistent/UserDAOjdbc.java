@@ -1,16 +1,10 @@
-package com.db.dao.implementation;
+package com.tennis.persistent;
 
-import com.dao.model.User;
-import com.db.dao.UserDAO;
-
+import com.tennis.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAOjdbc implements UserDAO {
 	@Autowired
@@ -50,8 +44,8 @@ public class UserDAOjdbc implements UserDAO {
 		}
 		return user;
 	}
-	
-	public void insertUser(User user) {
+
+	public void create(User user) {
 		String query = "insert into Users (userName, password, email, birthdate, sex) " +
 				"values (?, ?, ?, ?, ?)";
 		Connection connection = null;
@@ -71,7 +65,6 @@ public class UserDAOjdbc implements UserDAO {
 			} else {
 				System.out.println("Inserted::" + numberOfInsertedRows + " rows");
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

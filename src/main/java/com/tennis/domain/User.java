@@ -1,4 +1,4 @@
-package com.dao.model;
+package com.tennis.domain;
 
 public class User {
 
