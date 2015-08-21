@@ -1,7 +1,9 @@
 package com.tennis.config;
 
 import com.tennis.persistent.UserDAO;
-import com.tennis.persistent.UserDAOjdbc;
+import com.tennis.persistent.UserDAOjdbcImpl;
+import com.tennis.vaidation.UserValidator;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,6 +25,11 @@ public class Config {
 
 	@Bean
 	public UserDAO userDAO() {
-		return new UserDAOjdbc();
+		return new UserDAOjdbcImpl();
+	}
+	
+	@Bean
+	public UserValidator userValidator() {
+		return new UserValidator();
 	}
 }

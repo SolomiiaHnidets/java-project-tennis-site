@@ -1,12 +1,14 @@
 package com.tennis.persistent;
 
 import com.tennis.domain.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
+
 import java.sql.*;
 
-public class UserDAOjdbc implements UserDAO {
+public class UserDAOjdbcImpl implements UserDAO {
 	@Autowired
 	DataSource dataSource;
 	PreparedStatement preparedStatement;

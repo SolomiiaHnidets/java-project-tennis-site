@@ -2,7 +2,7 @@ package com.tennis.web;
 
 
 import com.tennis.domain.User;
-import com.tennis.persistent.UserDAOjdbc;
+import com.tennis.persistent.UserDAOjdbcImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ public class HelloController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ResponseEntity<String> show(
 			@RequestParam(value = "id", required = true) int id) {
-		UserDAOjdbc userDAO = new UserDAOjdbc();
+		UserDAOjdbcImpl userDAO = new UserDAOjdbcImpl();
 		User user = userDAO.getById(id);
 		return new ResponseEntity<String>(user.getUserName(), HttpStatus.OK);
 
