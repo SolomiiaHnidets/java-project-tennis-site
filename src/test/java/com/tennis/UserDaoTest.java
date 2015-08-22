@@ -35,14 +35,15 @@ public class UserDaoTest {
 	public void testInsertUser() {
 		User user = new User();
 		BindingResult result = mock(BindingResult.class); 
-		user.setUserName("uran");
-		user.setPassword("password");
-		user.setEmail("some@www");
+		user.setUserName("uranfgh21");
+		user.setPassword("passwfgord");
+		user.setEmail("some@www.ru");
 		userValidator.validate(user, result);  
 		//Check validation errors
 		if (result.hasErrors()) {
 			System.out.println( "addUser");
+		}else {
+			userDAO.create(user);
 		}
-		userDAO.create(user);
 	}
 }
