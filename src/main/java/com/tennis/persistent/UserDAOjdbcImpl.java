@@ -1,16 +1,14 @@
 package com.tennis.persistent;
 
 import com.tennis.domain.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.sql.DataSource;
-
 import java.sql.*;
 
 public class UserDAOjdbcImpl implements UserDAO {
 	@Autowired
 	DataSource dataSource;
+
 	PreparedStatement preparedStatement;
 	User user;
 
@@ -46,7 +44,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 		}
 		return user;
 	}
-	
+
 	public User getByName(String name) {
 		String query = "select userName from Users where userName = ?";
 		user = null;
@@ -79,10 +77,10 @@ public class UserDAOjdbcImpl implements UserDAO {
 		}
 		return user;
 	}
-	
-	public void save(User user) {
-		String query = "insert into Users (userName, password, email, birthdate, sex) " +
-				"values (?, ?, ?, ?, ?)";
+
+	public void create(User user) {
+		String query = "insert into Users (userName, password, email, birthdate, sex) "
+				+ "values (?, ?, ?, ?, ?)";
 		Connection connection = null;
 		preparedStatement = null;
 		int numberOfInsertedRows = 0;
@@ -98,7 +96,35 @@ public class UserDAOjdbcImpl implements UserDAO {
 			if (numberOfInsertedRows == 0) {
 				System.out.println("Rows did not inserted!");
 			} else {
-				System.out.println("Inserted::" + numberOfInsertedRows + " rows");
+				System.out.println("Inserted::" + numberOfInsertedRows
+						+ " rows");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void delete(int id) {
+		String query = "delete from Users where userID = ?";
+		Connection connection = null;
+		preparedStatement = null;
+		int numberOfInsertedRows = 0;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			numberOfInsertedRows = preparedStatement.executeUpdate();
+			if (numberOfInsertedRows == 0) {
+				System.out.println("Rows did not deleted!");
+			} else {
+				System.out.println("Deleted Record with ID = " + id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

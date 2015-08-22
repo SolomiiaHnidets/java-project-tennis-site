@@ -4,17 +4,13 @@ import com.tennis.config.Config;
 import com.tennis.domain.User;
 import com.tennis.persistent.UserDAO;
 import com.tennis.vaidation.UserValidator;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BindingResult;
-
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Config.class)
@@ -34,16 +30,21 @@ public class UserDaoTest {
 	@Test
 	public void testInsertUser() {
 		User user = new User();
-		BindingResult result = mock(BindingResult.class); 
+		BindingResult result = mock(BindingResult.class);
 		user.setUserName("uranfgh21");
 		user.setPassword("passwfgord");
 		user.setEmail("some@www.ru");
-		userValidator.validate(user, result);  
-		//Check validation errors
+		userValidator.validate(user, result);
+		// Check validation errors
 		if (result.hasErrors()) {
-			System.out.println( "addUser");
-		}else {
-			userDAO.save(user);
+			System.out.println("addUser");
+		} else {
+			userDAO.create(user);
 		}
+	}
+
+	@Test
+	public void testDeleteUser() {
+		userDAO.delete(1);;
 	}
 }
