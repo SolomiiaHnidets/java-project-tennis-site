@@ -46,8 +46,41 @@ public class UserDAOjdbcImpl implements UserDAO {
 		}
 		return user;
 	}
-
-	public void create(User user) {
+	
+	public User getByName(String name) {
+		String query = "select userName from Users where userName = ?";
+		user = null;
+		Connection connection = null;
+		preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, name);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				user = new User();
+				user.setUserID(resultSet.getInt("userID"));
+				user.setUserName(name);
+				System.out.println("User Found::" + user);
+			} else {
+				System.out.println("No User found with name=" + name);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+	
+	public void save(User user) {
 		String query = "insert into Users (userName, password, email, birthdate, sex) " +
 				"values (?, ?, ?, ?, ?)";
 		Connection connection = null;

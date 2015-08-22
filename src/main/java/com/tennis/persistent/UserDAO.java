@@ -4,7 +4,7 @@ import com.tennis.domain.User;
 
 public interface UserDAO {
 
-	void create(User user);
+	void save(User user);
 
 	User getById(int id);
 }

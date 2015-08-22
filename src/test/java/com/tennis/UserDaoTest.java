@@ -43,7 +43,7 @@ public class UserDaoTest {
 		if (result.hasErrors()) {
 			System.out.println( "addUser");
 		}else {
-			userDAO.create(user);
+			userDAO.save(user);
 		}
 	}
 }
