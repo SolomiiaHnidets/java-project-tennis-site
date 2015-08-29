@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOjdbcImpl implements UserDAO {
 	@Autowired
@@ -44,6 +46,12 @@ public class UserDAOjdbcImpl implements UserDAO {
 			}
 		}
 		return user;
+	}
+
+	@Override
+	public List<User> getAll() {
+		// TODO Add implementation
+		return new ArrayList<User>();
 	}
 
 	public User getByName(String name) {
