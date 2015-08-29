@@ -3,21 +3,32 @@ package com.tennis.config;
 import com.tennis.persistent.UserDAO;
 import com.tennis.persistent.UserDAOjdbcImpl;
 import com.tennis.vaidation.UserValidator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 import javax.sql.DataSource;
 
 @Configuration
+@PropertySource("user.properties")
 public class Config {
+
+	@Autowired
+	private Environment environment;
+
+	public static String DB_DRIVER_CLASSNAME = "database.driverClassName";
+	public static String DB_URL = "database.url";
+	public static String DB_USERNAME = "database.username";
+	public static String DB_PASSWORD = "database.password";
 
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/WebSite");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("solka1627");
+		dataSource.setDriverClassName(environment.getProperty(DB_DRIVER_CLASSNAME));
+		dataSource.setUrl(environment.getProperty(DB_URL));
+		dataSource.setUsername(environment.getProperty(DB_USERNAME));
+		dataSource.setPassword(environment.getProperty(DB_PASSWORD));
 		return dataSource;
 	}
 
