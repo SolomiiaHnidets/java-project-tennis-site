@@ -1,25 +1,22 @@
 package com.tennis;
 
-import com.tennis.config.Config;
 import com.tennis.domain.User;
-import com.tennis.persistent.UserDAO;
-import com.tennis.vaidation.UserValidator;
+import com.tennis.persistence.UserDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BindingResult;
-import static org.mockito.Mockito.mock;
+
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Config.class)
+//@ContextConfiguration(classes = Config.class)
 public class UserDaoTest {
 
 	@Autowired
 	private UserDAO userDAO;
-	@Autowired
-	private UserValidator userValidator;
 
 	@Test
 	public void testGetById() {
@@ -34,7 +31,6 @@ public class UserDaoTest {
 		user.setUserName("uranfgh21");
 		user.setPassword("passwfgord");
 		user.setEmail("some@www.ru");
-		userValidator.validate(user, result);
 		// Check validation errors
 		if (result.hasErrors()) {
 			System.out.println("addUser");

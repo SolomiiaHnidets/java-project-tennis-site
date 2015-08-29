@@ -11,7 +11,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "{ID=" + userID + ",Name=" + userName + "}";
+		return "User{" +
+				"userID=" + userID +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", birthDate='" + birthDate + '\'' +
+				", sex=" + sex +
+				'}';
 	}
 
 	public int getUserID() {

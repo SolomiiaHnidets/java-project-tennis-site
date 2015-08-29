@@ -1,5 +1,4 @@
-package com.tennis.persistent;
-
+package com.tennis.persistence;
 import com.tennis.domain.User;
 
 public interface UserDAO {

@@ -1,7 +1,8 @@
-package com.tennis.persistent;
+package com.tennis.persistence;
 
 import com.tennis.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.sql.DataSource;
 import java.sql.*;
 
