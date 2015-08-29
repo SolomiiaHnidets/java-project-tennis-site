@@ -6,13 +6,12 @@ import com.tennis.persistent.UserDAOjdbcImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 @RequestMapping("/hello")
-public class HelloController {
+public class UserController {
 
 	@RequestMapping(value = "/rest", method = RequestMethod.GET)
 	public ResponseEntity<String> rest() {

@@ -45,6 +45,6 @@ public class UserDaoTest {
 
 	@Test
 	public void testDeleteUser() {
-		userDAO.delete(1);;
+		userDAO.delete(1);
 	}
 }
