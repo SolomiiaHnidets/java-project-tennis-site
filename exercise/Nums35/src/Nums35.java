@@ -4,6 +4,8 @@ class Stack {
 	private static final double DEFAOULT_LOAD_FACTOR = 1.5;
 	private static final int DEFAOULT_SIZE = 10;
 
+	
+	
 	public Stack() {
 		this(DEFAOULT_SIZE);
 	}
