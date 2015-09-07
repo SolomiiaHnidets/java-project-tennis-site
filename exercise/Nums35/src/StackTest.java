@@ -1,27 +1,20 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class StackTest {
 
-	private Stack stack;
+	private Stack<Integer> stack;
 
-	@Before
 	public void setUp() {
-		stack = new Stack();
+		stack = new Stack<>();
 	}
-	
+
 	@Test
-	public void shouldAddsElement() {
-		int element = 10;
+	public void pushTest() {
+		Integer element = 10;
 		stack.push(element);
 		assertEquals(element, stack.pop());
-	}
-
-	@Test
-	public void test() {
-//		fail("Not yet implemented");
 	}
 
 }
