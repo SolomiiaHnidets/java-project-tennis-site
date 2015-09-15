@@ -1,6 +1,7 @@
 package com.tennis;
 
 import com.tennis.domain.User;
+import com.tennis.configuration.Config;
 import com.tennis.persistence.UserDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = Config.class)
+@ContextConfiguration(classes = Config.class)
 public class UserDaoTest {
 
 	@Autowired
