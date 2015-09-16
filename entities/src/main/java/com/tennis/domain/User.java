@@ -1,24 +1,42 @@
 package com.tennis.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name = "User")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userID;
+
+	@Column(name = "userName", nullable = false)
 	private String userName;
+
+	@Column(name = "password", nullable = false)
 	private String password;
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "birthDate")
 	private String birthDate;
+
+	@Column(name = "sex")
 	private char sex;
 
 	@Override
 	public String toString() {
-		return "User{" +
-				"userID=" + userID +
-				", userName='" + userName + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				", birthDate='" + birthDate + '\'' +
-				", sex=" + sex +
-				'}';
+		return "User{" + "userID=" + userID + ", userName='" + userName + '\''
+				+ ", password='" + password + '\'' + ", email='" + email + '\''
+				+ ", birthDate='" + birthDate + '\'' + ", sex=" + sex + '}';
 	}
 
 	public int getUserID() {
