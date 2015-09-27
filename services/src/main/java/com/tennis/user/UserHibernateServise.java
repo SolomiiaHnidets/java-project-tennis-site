@@ -3,7 +3,7 @@ package com.tennis.user;
 import java.util.List;
 
 import com.tennis.domain.User;
-import com.tennis.hibernate.UserHibernateImpl;
+import com.tennis.persistence.UserHibernateImpl;
 
 public class UserHibernateServise {
 	private static UserHibernateImpl userDAO;

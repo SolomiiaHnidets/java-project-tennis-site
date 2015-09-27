@@ -1,4 +1,4 @@
-package com.tennis.hibernate;
+package com.tennis.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import com.tennis.domain.User;
-import com.tennis.persistence.UserDAO;
 
 public class UserHibernateImpl implements UserDAO {
 
@@ -31,6 +30,11 @@ public class UserHibernateImpl implements UserDAO {
 
 	public void closeCurrentSession() {
 		currentSession.close();
+	}
+
+	public void openCurrentSessionwithTransaction() {
+		currentTransaction.begin();
+		currentSession = getSessionFactory().openSession();
 	}
 
 	public void closeCurrentSessionwithTransaction() {
@@ -95,6 +99,7 @@ public class UserHibernateImpl implements UserDAO {
 
 	@Override
 	public void create(User user) {
+		getCurrentSession().save(user);
 		// user = new User();
 		// user.setUserName("Arpit");
 		// Session ss = sf.openSession();
