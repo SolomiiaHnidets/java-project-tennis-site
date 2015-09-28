@@ -10,17 +10,18 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userID", nullable = true)
 	private int userID;
 
-	@Column(name = "userName", nullable = false)
+	@Column(name = "userName")
 	private String userName;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
 	@Column(name = "email")
@@ -32,11 +33,10 @@ public class User {
 	@Column(name = "sex")
 	private char sex;
 
-	@Override
-	public String toString() {
-		return "User{" + "userID=" + userID + ", userName='" + userName + '\''
-				+ ", password='" + password + '\'' + ", email='" + email + '\''
-				+ ", birthDate='" + birthDate + '\'' + ", sex=" + sex + '}';
+	public User(String name, String password) {
+		this.userName = name;
+		this.password = password;
+
 	}
 
 	public int getUserID() {

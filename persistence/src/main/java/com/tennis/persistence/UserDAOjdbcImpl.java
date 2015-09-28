@@ -15,6 +15,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 	PreparedStatement preparedStatement;
 	User user;
 
+	@Override
 	public User getById(int id) {
 		String query = "select userName from Users where userID = ?";
 		user = null;
@@ -27,7 +28,8 @@ public class UserDAOjdbcImpl implements UserDAO {
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				user = new User();
+				user = new User(resultSet.getString("userName"),
+						resultSet.getString("password"));
 				user.setUserID(id);
 				user.setUserName(resultSet.getString("userName"));
 				System.out.println("User Found::" + user);
@@ -54,6 +56,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 		return new ArrayList<User>();
 	}
 
+	@Override
 	public User getByName(String name) {
 		String query = "select userName from Users where userName = ?";
 		user = null;
@@ -66,7 +69,8 @@ public class UserDAOjdbcImpl implements UserDAO {
 			preparedStatement.setString(1, name);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				user = new User();
+				user = new User(resultSet.getString("userName"),
+						resultSet.getString("password"));
 				user.setUserID(resultSet.getInt("userID"));
 				user.setUserName(name);
 				System.out.println("User Found::" + user);
@@ -87,6 +91,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 		return user;
 	}
 
+	@Override
 	public void create(User user) {
 		String query = "insert into Users (userName, password, email, birthdate, sex) "
 				+ "values (?, ?, ?, ?, ?)";
@@ -120,6 +125,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 		}
 	}
 
+	@Override
 	public void delete(int id) {
 		String query = "delete from Users where userID = ?";
 		Connection connection = null;

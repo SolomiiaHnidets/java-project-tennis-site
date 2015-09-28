@@ -1,9 +1,8 @@
-
+package com.tennis.persistence;
 import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
 
 public abstract class AbstractHibernateDaoImpl {
 
@@ -42,8 +41,8 @@ public abstract class AbstractHibernateDaoImpl {
 	private SessionFactory getSessionFactory() {
 		Configuration configuration = new Configuration();
 		configuration.configure();
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).build();
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		return sessionFactory;
 	}

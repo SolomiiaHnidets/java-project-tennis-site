@@ -4,7 +4,9 @@ import com.tennis.domain.User;
 
 import java.util.List;
 
-public class UserHibernateImpl extends AbstractHibernateDaoImpl implements UserDAO {
+public class UserHibernateImpl extends AbstractHibernateDaoImpl
+		implements
+			UserDAO {
 
 	@Override
 	public void create(User user) {
@@ -40,7 +42,11 @@ public class UserHibernateImpl extends AbstractHibernateDaoImpl implements UserD
 
 	public static void main(String[] args) {
 		UserDAO userDAO = new UserHibernateImpl();
-		User user = new User();
+		User user = new User("solya", "some");
+		user.setUserID(1);
+		user.setBirthDate("768976");
+		user.setEmail("ghjk");
+		user.setSex('M');
 		userDAO.create(user);
 	}
 }
