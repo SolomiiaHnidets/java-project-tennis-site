@@ -54,9 +54,19 @@ public class UserHibernateImpl extends AbstractHibernateDaoImpl
 		}
 		return user;
 	}
+
 	@Override
 	public void delete(int id) {
-
+		User user;
+		try {
+			openCurrentSessionWithTransaction();
+			user = (User) session.get(User.class, id);
+			session.delete(user);
+		} catch (Exception e) {
+			handleException(e);
+		} finally {
+			closeCurrentSessionWithTransaction();
+		}
 	}
 
 	@Override
@@ -90,5 +100,11 @@ public class UserHibernateImpl extends AbstractHibernateDaoImpl
 		}
 		user = userDAO.getById(1);
 		System.out.println(user.getUserName());
+		userDAO.delete(1);
+		users = userDAO.getAll();
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).getUserName() + " "
+					+ users.get(i).getUserID());
+		}
 	}
 }
