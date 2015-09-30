@@ -13,8 +13,22 @@ import org.hibernate.annotations.Type;
 @Table(name = "Users")
 public class User {
 
+	public User() {
+		this.userID = -1;
+		this.userName = null;
+		this.password = null;
+		this.email = null;
+		this.birthDate = null;
+		this.sex = 'M';
+	}
+
+	public User(String name, String password) {
+		this.userName = name;
+		this.password = password;
+	}
+
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userID", nullable = true)
 	private int userID;
 
@@ -32,12 +46,6 @@ public class User {
 
 	@Column(name = "sex")
 	private char sex;
-
-	public User(String name, String password) {
-		this.userName = name;
-		this.password = password;
-
-	}
 
 	public int getUserID() {
 		return userID;
