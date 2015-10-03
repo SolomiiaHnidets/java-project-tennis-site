@@ -12,15 +12,12 @@ public class UserDAOjdbcImpl implements UserDAO {
 	@Autowired
 	DataSource dataSource;
 
-	PreparedStatement preparedStatement;
-	User user;
-
 	@Override
 	public User getById(int id) {
 		String query = "select userName from Users where userID = ?";
-		user = null;
+		User user = null;
 		Connection connection = null;
-		preparedStatement = null;
+		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = dataSource.getConnection();
@@ -57,99 +54,113 @@ public class UserDAOjdbcImpl implements UserDAO {
 	}
 
 	@Override
-	public User getByName(String name) {
-		String query = "select userName from Users where userName = ?";
-		user = null;
-		Connection connection = null;
-		preparedStatement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, name);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				user = new User(resultSet.getString("userName"),
-						resultSet.getString("password"));
-				user.setUserID(resultSet.getInt("userID"));
-				user.setUserName(name);
-				System.out.println("User Found::" + user);
-			} else {
-				System.out.println("No User found with name=" + name);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				resultSet.close();
-				preparedStatement.close();
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return user;
-	}
-
-	@Override
 	public void create(User user) {
-		String query = "insert into Users (userName, password, email, birthdate, sex) "
-				+ "values (?, ?, ?, ?, ?)";
-		Connection connection = null;
-		preparedStatement = null;
-		int numberOfInsertedRows = 0;
-		try {
-			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, user.getUserName());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.setString(3, user.getEmail());
-			preparedStatement.setString(4, user.getBirthDate());
-			preparedStatement.setLong(5, user.getSex());
-			numberOfInsertedRows = preparedStatement.executeUpdate();
-			if (numberOfInsertedRows == 0) {
-				System.out.println("Rows did not inserted!");
-			} else {
-				System.out.println("Inserted::" + numberOfInsertedRows
-						+ " rows");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+
 	}
 
 	@Override
 	public void delete(int id) {
-		String query = "delete from Users where userID = ?";
-		Connection connection = null;
-		preparedStatement = null;
-		int numberOfInsertedRows = 0;
-		try {
-			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, id);
-			numberOfInsertedRows = preparedStatement.executeUpdate();
-			if (numberOfInsertedRows == 0) {
-				System.out.println("Rows did not deleted!");
-			} else {
-				System.out.println("Deleted Record with ID = " + id);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+
 	}
+
+	@Override
+	public User getByName(String name) {
+		return null;
+	}
+	//	@Override
+//	public User getByName(String name) {
+//		String query = "select userName from Users where userName = ?";
+//		user = null;
+//		Connection connection = null;
+//		preparedStatement = null;
+//		ResultSet resultSet = null;
+//		try {
+//			connection = dataSource.getConnection();
+//			preparedStatement = connection.prepareStatement(query);
+//			preparedStatement.setString(1, name);
+//			resultSet = preparedStatement.executeQuery();
+//			if (resultSet.next()) {
+//				user = new User(resultSet.getString("userName"),
+//						resultSet.getString("password"));
+//				user.setUserID(resultSet.getInt("userID"));
+//				user.setUserName(name);
+//				System.out.println("User Found::" + user);
+//			} else {
+//				System.out.println("No User found with name=" + name);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				resultSet.close();
+//				preparedStatement.close();
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return user;
+//	}
+//
+//	@Override
+//	public void create(User user) {
+//		String query = "insert into Users (userName, password, email, birthdate, sex) "
+//				+ "values (?, ?, ?, ?, ?)";
+//		Connection connection = null;
+//		preparedStatement = null;
+//		int numberOfInsertedRows = 0;
+//		try {
+//			connection = dataSource.getConnection();
+//			preparedStatement = connection.prepareStatement(query);
+//			preparedStatement.setString(1, user.getUserName());
+//			preparedStatement.setString(2, user.getPassword());
+//			preparedStatement.setString(3, user.getEmail());
+//			preparedStatement.setString(4, user.getBirthDate());
+//			preparedStatement.setLong(5, user.getSex());
+//			numberOfInsertedRows = preparedStatement.executeUpdate();
+//			if (numberOfInsertedRows == 0) {
+//				System.out.println("Rows did not inserted!");
+//			} else {
+//				System.out.println("Inserted::" + numberOfInsertedRows
+//						+ " rows");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				preparedStatement.close();
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//
+//	@Override
+//	public void delete(int id) {
+//		String query = "delete from Users where userID = ?";
+//		Connection connection = null;
+//		preparedStatement = null;
+//		int numberOfInsertedRows = 0;
+//		try {
+//			connection = dataSource.getConnection();
+//			preparedStatement = connection.prepareStatement(query);
+//			preparedStatement.setInt(1, id);
+//			numberOfInsertedRows = preparedStatement.executeUpdate();
+//			if (numberOfInsertedRows == 0) {
+//				System.out.println("Rows did not deleted!");
+//			} else {
+//				System.out.println("Deleted Record with ID = " + id);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				preparedStatement.close();
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 }
