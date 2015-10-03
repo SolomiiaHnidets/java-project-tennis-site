@@ -14,12 +14,6 @@ import org.hibernate.annotations.Type;
 public class User {
 
 	public User() {
-		this.userID = -1;
-		this.userName = null;
-		this.password = null;
-		this.email = null;
-		this.birthDate = null;
-		this.sex = 'M';
 	}
 
 	public User(String name, String password) {
@@ -45,7 +39,7 @@ public class User {
 	private String birthDate;
 
 	@Column(name = "sex")
-	private char sex;
+	private String sex;
 
 	public int getUserID() {
 		return userID;
@@ -87,11 +81,11 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 }
