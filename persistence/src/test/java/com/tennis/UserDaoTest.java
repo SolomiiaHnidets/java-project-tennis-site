@@ -72,9 +72,25 @@ public class UserDaoTest {
 		Mockito.when(mockResultSet.next()).thenReturn(true);
 		user = userDAO.getById(1);
 		assertEquals(1, user.getUserID());
+		// check the method was called, with the expected query string and
+		// parameter values
 		Mockito.verify(mockPreparedStatement).executeQuery();
 	}
 
+	@Test
+	public void testInsertUser() throws Exception {
+		user = new User("uranfgh21", "passwfgord");
+		user.setBirthDate("768976");
+		user.setEmail("ghjk");
+		user.setSex("M");
+		String query = "insert into Users (userName, password, email, birthdate, sex) "
+				+ "values (?, ?, ?, ?, ?)";
+		Mockito.when(mockConnection.prepareStatement(query)).thenReturn(
+				mockPreparedStatement);
+		Mockito.when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+		userDAO.create(user);
+		Mockito.verify(mockPreparedStatement).executeUpdate();
+	}
 	//
 	// @Test
 	// public void testDeleteUser() {
