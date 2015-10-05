@@ -2,9 +2,12 @@ package com.tennis.persistence;
 
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+
 import javax.sql.DataSource;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 
 	@Override
 	public User getById(int id) {
-		String query = "select userName from Users where userID = ?";
+		String query = "select * from Users where userID = ?";
 		User user = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -51,7 +54,34 @@ public class UserDAOjdbcImpl implements UserDAO {
 
 	@Override
 	public List<User> getAll() {
-		// TODO Add implementation
+		List<User> users = new ArrayList<User>();
+		String query = "select * from Users";
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				user = new User(resultSet.getString("userName"),
+						resultSet.getString("password"));
+				user.setUserID(resultSet.getInt("userID"));
+				user.setUserName(resultSet.getString("userName"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return new ArrayList<User>();
 	}
 

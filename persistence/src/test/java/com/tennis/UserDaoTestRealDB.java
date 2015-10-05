@@ -1,5 +1,8 @@
 package com.tennis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;
 import com.tennis.persistence.*;
@@ -43,6 +46,12 @@ public class UserDaoTestRealDB {
 	public void testGetById() {
 		User user = userDAO.getById(userID);
 		System.out.println(user);
+	}
+
+	@Test
+	public void testGetAll() {
+		List<User> users = new ArrayList<User>();
+		users = userDAO.getAll();
 	}
 
 	@Test
