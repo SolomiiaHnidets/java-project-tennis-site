@@ -2,6 +2,8 @@ package com.tennis.web;
 
 import com.tennis.domain.User;
 import com.tennis.user.UserService;
+import com.tennis.user.impl.UserServiceImpl;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ public class UserController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<User> getAllUsers() {
+		// UserService userService = new UserServiceImpl();
 		// The UserServiceImpl is already injected and we can use it
 		return userService.getAll();
 	}

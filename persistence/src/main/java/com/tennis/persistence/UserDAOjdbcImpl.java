@@ -67,8 +67,8 @@ public class UserDAOjdbcImpl implements UserDAO {
 						resultSet.getString("password"));
 				user.setUserID(resultSet.getInt("userID"));
 				user.setUserName(resultSet.getString("userName"));
-				users.add(user);
 			}
+			users.add(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -80,7 +80,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return new ArrayList<User>();
+		return users;
 	}
 
 	@Override

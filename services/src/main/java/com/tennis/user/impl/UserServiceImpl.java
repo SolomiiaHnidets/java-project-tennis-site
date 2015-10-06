@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAll() {
+		User user = new User("solka", "password");
+		user.setBirthDate("01.02.1995");
+		user.setEmail("email@com");
+		user.setSex("M");
+		userDAO.create(user);
 		return userDAO.getAll();
 	}
 }
