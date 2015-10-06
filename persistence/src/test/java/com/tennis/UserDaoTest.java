@@ -64,7 +64,7 @@ public class UserDaoTest {
 	}
 	@Test
 	public void testGetById() throws Exception {
-		String query = "select userName from Users where userID = ?";
+		String query = "select * from Users where userID = ?";
 		Mockito.when(mockConnection.prepareStatement(query)).thenReturn(
 				mockPreparedStatement);
 		Mockito.when(mockPreparedStatement.executeQuery()).thenReturn(
@@ -91,9 +91,14 @@ public class UserDaoTest {
 		userDAO.create(user);
 		Mockito.verify(mockPreparedStatement).executeUpdate();
 	}
-	//
-	// @Test
-	// public void testDeleteUser() {
-	// userDAO.delete(1);
-	// }
+
+	@Test
+	public void testDeleteUser() throws Exception {
+		String query = "delete from Users where userID = ?";
+		Mockito.when(mockConnection.prepareStatement(query)).thenReturn(
+				mockPreparedStatement);
+		Mockito.when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+		userDAO.delete(1);
+		Mockito.verify(mockPreparedStatement).executeUpdate();
+	}
 }
