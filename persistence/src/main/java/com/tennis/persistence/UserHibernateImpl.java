@@ -1,10 +1,9 @@
 package com.tennis.persistence;
 
 import com.tennis.domain.User;
+import org.hibernate.Query;
 
 import java.util.List;
-
-import org.hibernate.Query;
 
 public class UserHibernateImpl extends AbstractHibernateDaoImpl
 		implements

@@ -1,21 +1,19 @@
 package com.tennis.persistence;
 
-import com.tennis.configuration.Config;
 import com.tennis.domain.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ContextConfiguration(classes = Config.class)
+@Component
 public class UserDAOjdbcImpl implements UserDAO {
+
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	@Override
 	public User getById(int id) {

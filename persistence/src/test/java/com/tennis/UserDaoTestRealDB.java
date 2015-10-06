@@ -1,20 +1,16 @@
 package com.tennis;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;
-import com.tennis.persistence.*;
-
+import com.tennis.persistence.UserDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.validation.BindingResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Config.class)
