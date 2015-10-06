@@ -7,6 +7,9 @@
     <groupId>com.tennis</groupId>
     <artifactId>tennisProject-persistence</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+    	<powermock.version>1.5.1</powermock.version>
+	</properties>
 
     <parent>
         <groupId>com.tennis</groupId>
@@ -21,11 +24,24 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.tennis</groupId>-->
-            <!--<artifactId>tennisProject-web</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
+	<dependency>
+		<groupId>org.powermock</groupId>
+		<artifactId>powermock-module-junit4</artifactId>
+		<version>${powermock.version}</version>
+		<scope>test</scope>
+	</dependency>
+   
+   <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+   </dependency>
+<!--         <dependency> -->
+<!--             <groupId>com.tennis</groupId> -->
+<!--             <artifactId>tennisProject-web</artifactId> -->
+<!--             <version>1.0-SNAPSHOT</version> -->
+<!--         </dependency> -->
 
     </dependencies>
 </project>
