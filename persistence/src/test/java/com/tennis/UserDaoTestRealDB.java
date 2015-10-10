@@ -1,8 +1,9 @@
 package com.tennis;
 
-import com.tennis.configuration.Config;
+import com.tennis.configuration.*;
 import com.tennis.domain.User;
 import com.tennis.persistence.UserDAO;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 @ContextConfiguration(classes = Config.class)
 public class UserDaoTestRealDB {
 
-	int userID = 1;
+	private final int userID = 1;
 	@Autowired
 	private UserDAO userDAO;
 
@@ -29,7 +30,7 @@ public class UserDaoTestRealDB {
 	@Test
 	public void testInsertUser() {
 		User user = new User("solyap", "some");
-		user.setBirthDate("768976");
+		user.setBirthDate(java.sql.Date.valueOf("2013-05-06"));
 		user.setEmail("ghjk");
 		user.setSex("M");
 		userDAO.create(user);

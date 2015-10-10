@@ -18,10 +18,10 @@ public class Config {
 	@Autowired
 	private Environment environment;
 
-	public static String DB_DRIVER_CLASSNAME = "database.driverClassName";
-	public static String DB_URL = "database.url";
-	public static String DB_USERNAME = "database.username";
-	public static String DB_PASSWORD = "database.password";
+	public static final String DB_DRIVER_CLASSNAME = "database.driverClassName";
+	public static final String DB_URL = "database.url";
+	public static final String DB_USERNAME = "database.username";
+	public static final String DB_PASSWORD = "database.password";
 
 	@Bean
 	public DataSource dataSource() {

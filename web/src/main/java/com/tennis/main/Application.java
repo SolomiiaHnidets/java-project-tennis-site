@@ -7,10 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("com")
+// TODO
 public class Application {
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		ApplicationContext ctx = SpringApplication.run(Application.class, args);
 	}
-
 }

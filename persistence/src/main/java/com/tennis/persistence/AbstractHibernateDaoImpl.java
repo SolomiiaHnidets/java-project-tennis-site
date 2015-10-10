@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public abstract class AbstractHibernateDaoImpl {
 
-	private SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
 	protected Session session;
 
@@ -47,7 +47,8 @@ public abstract class AbstractHibernateDaoImpl {
 		configuration.configure();
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		SessionFactory sessionFactory = configuration
+				.buildSessionFactory(serviceRegistry);
 		return sessionFactory;
 	}
 

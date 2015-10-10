@@ -18,8 +18,8 @@ import com.tennis.persistence.UserHibernateImpl;
 @ContextConfiguration(classes = Config.class)
 public class UserHibernateTest {
 
-	// @Autowired
-	private UserHibernateImpl userHibernate = new UserHibernateImpl();
+	@Autowired
+	private UserDAO userHibernate;
 
 	@Test
 	public void testCreate() {

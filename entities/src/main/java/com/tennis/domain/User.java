@@ -1,5 +1,7 @@
 package com.tennis.domain;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,7 +31,8 @@ public class User {
 	private String email;
 
 	@Column(name = "birthDate")
-	private String birthDate;
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
 
 	@Column(name = "sex")
 	private String sex;
@@ -66,11 +69,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
