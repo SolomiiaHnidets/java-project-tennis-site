@@ -1,5 +1,6 @@
 package com.tennis.web;
 
+import com.tennis.configuration.Config;
 import com.tennis.domain.User;
 import com.tennis.user.UserService;
 import com.tennis.user.impl.UserServiceImpl;
@@ -8,12 +9,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@ContextConfiguration(classes = Config.class)
 public class UserController {
 
 	private static final Logger logger = Logger.getLogger(UserController.class);

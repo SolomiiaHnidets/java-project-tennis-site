@@ -1,6 +1,9 @@
 package com.tennis.configuration;
 
 import com.tennis.persistence.*;
+import com.tennis.user.UserService;
+import com.tennis.user.impl.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -39,6 +42,11 @@ public class Config {
 	@Bean
 	public UserDAO userHibernate() {
 		return new UserHibernateImpl();
+	}
+
+	@Bean
+	public UserService userService() {
+		return new UserServiceImpl();
 	}
 
 }
