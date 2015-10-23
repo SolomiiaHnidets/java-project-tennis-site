@@ -1,6 +1,9 @@
 package com.tennis.configuration;
 
-import com.tennis.persistence.*;
+import com.tennis.persistance.*;
+import com.tennis.persistance.user.UserDAO;
+import com.tennis.persistance.user.UserDAOjdbcImpl;
+import com.tennis.persistance.user.UserHibernateImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
