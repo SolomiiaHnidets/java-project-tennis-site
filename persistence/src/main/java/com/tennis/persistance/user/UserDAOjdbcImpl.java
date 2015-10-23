@@ -1,7 +1,7 @@
 package com.tennis.persistance.user;
 
 import com.tennis.domain.User;
-import com.tennis.util.HashedPassword;
+import com.tennis.util.PasswordEncoder;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -260,7 +260,7 @@ public class UserDAOjdbcImpl implements UserDAO {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, user.getUserName());
-			String hashedPassword = HashedPassword.encodePassword(user
+			String hashedPassword = PasswordEncoder.encrypt(user
 					.getPassword());
 			preparedStatement.setString(2, hashedPassword);
 			preparedStatement.setString(3, user.getEmail());

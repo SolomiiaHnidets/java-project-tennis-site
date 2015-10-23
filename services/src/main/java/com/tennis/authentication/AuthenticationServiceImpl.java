@@ -40,7 +40,7 @@ public class AuthenticationServiceImpl {
 		if (username.contains(AT_CHARACTER)) {
 			user = userDAO.getByEmail(username.toLowerCase());
 			if (user != null) {
-				if (!HashedPassword.isMatchPassword(password,
+				if (!PasswordEncoder.isMatchPassword(password,
 						user.getPassword())) {
 					throw new Exception("Bad password");
 				}
@@ -51,7 +51,7 @@ public class AuthenticationServiceImpl {
 		} else {
 			user = userDAO.getByName(username.toLowerCase());
 			if (user != null) {
-				if (!HashedPassword.isMatchPassword(password,
+				if (!PasswordEncoder.isMatchPassword(password,
 						user.getPassword())) {
 					throw new Exception("Bad password");
 				}

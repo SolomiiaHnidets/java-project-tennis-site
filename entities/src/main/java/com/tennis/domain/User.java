@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import com.tennis.util.HashedPassword;
+import com.tennis.util.PasswordEncoder;
 
 @Entity
 @Table(name = "Users")
@@ -71,7 +71,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = HashedPassword.encodePassword(password);
+		this.password = PasswordEncoder.encrypt(password);
 	}
 
 	public String getEmail() {
