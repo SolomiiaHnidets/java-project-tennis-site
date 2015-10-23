@@ -1,4 +1,4 @@
-package com.tennis.persistence;
+package com.tennis.persistance;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

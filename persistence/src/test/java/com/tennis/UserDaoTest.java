@@ -2,7 +2,8 @@ package com.tennis;
 
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;
-import com.tennis.persistence.UserDAO;
+import com.tennis.persistance.user.UserDAO;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

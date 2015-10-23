@@ -3,7 +3,7 @@ package com.tennis.web;
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;
 import com.tennis.user.UserService;
-import com.tennis.user.impl.UserServiceImpl;
+import com.tennis.user.UserServiceImpl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,8 @@
-package com.tennis.persistence;
+package com.tennis.persistance.user;
 
 import com.tennis.domain.User;
+import com.tennis.persistance.AbstractHibernateDaoImpl;
+
 import org.hibernate.Query;
 
 import java.util.List;
@@ -70,6 +72,30 @@ public class UserHibernateImpl extends AbstractHibernateDaoImpl
 
 	@Override
 	public User getByName(String name) {
+		return null;
+	}
+
+	// @Override
+	// public void updateToken(String name, String token) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+
+	@Override
+	public User getByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getByEmailAndPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getByNameAndPassword(String name, String password) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

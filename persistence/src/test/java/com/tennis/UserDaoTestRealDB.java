@@ -2,7 +2,7 @@ package com.tennis;
 
 import com.tennis.configuration.*;
 import com.tennis.domain.User;
-import com.tennis.persistence.UserDAO;
+import com.tennis.persistance.user.UserDAO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +30,19 @@ public class UserDaoTestRealDB {
 	@Test
 	public void testInsertUser() {
 		User user = new User("solyap", "some");
+		user.setBirthDate(java.sql.Date.valueOf("2013-05-06"));
+		user.setEmail("ghjk");
+		user.setSex("M");
+		userDAO.create(user);
+		user.setUserName("solya");
+		user.setPassword("password");
+		userDAO.create(user);
+	}
+
+	@Test
+	// TODO expected exception
+	public void testInsertExistingUser() {
+		User user = new User("solya", "some");
 		user.setBirthDate(java.sql.Date.valueOf("2013-05-06"));
 		user.setEmail("ghjk");
 		user.setSex("M");

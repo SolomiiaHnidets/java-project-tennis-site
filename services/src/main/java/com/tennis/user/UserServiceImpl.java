@@ -1,12 +1,12 @@
-package com.tennis.user.impl;
+package com.tennis.user;
 
 import com.tennis.domain.User;
-import com.tennis.persistence.UserDAO;
-import com.tennis.user.UserService;
+import com.tennis.persistance.user.UserDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -25,4 +25,15 @@ public class UserServiceImpl implements UserService {
 		userDAO.create(user);
 		return userDAO.getAll();
 	}
+
+	// public String createAuthorizationToken(User user) {
+	// if(user.getAuthorizationToken() == null ||
+	// user.getAuthorizationToken().hasExpired()) {
+	// user.setAuthorizationToken(new AuthorizationToken(user,
+	// applicationConfig.getAuthorizationExpiryTimeInSeconds()));
+	// userRepository.save(user);
+	// }
+	// return user.getAuthorizationToken();
+	// }
+
 }

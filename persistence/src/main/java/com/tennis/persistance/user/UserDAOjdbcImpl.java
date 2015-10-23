@@ -1,6 +1,7 @@
-package com.tennis.persistence;
+package com.tennis.persistance.user;
 
 import com.tennis.domain.User;
+import com.tennis.util.HashedPassword;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,9 +94,10 @@ public class UserDAOjdbcImpl implements UserDAO {
 		}
 		return users;
 	}
+
 	@Override
 	public User getByName(String name) {
-		String query = "select userName from Users where userName = ?";
+		String query = "select * from Users where userName = ?";
 		User user = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -110,10 +112,126 @@ public class UserDAOjdbcImpl implements UserDAO {
 					user = new User(resultSet.getString("userName"),
 							resultSet.getString("password"));
 					user.setUserID(resultSet.getInt("userID"));
-					user.setUserName(name);
+					user.setEmail(resultSet.getString("email"));
 					logger.info("User Found:" + user);
 				} else {
 					logger.info("No User found with name=" + name);
+				}
+			} finally {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		String query = "select * from Users where email = ?";
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			resultSet = preparedStatement.executeQuery();
+			try {
+				if (resultSet.next()) {
+					user = new User(resultSet.getString("userName"),
+							resultSet.getString("password"));
+					user.setUserID(resultSet.getInt("userID"));
+					user.setEmail(email);
+					logger.info("User Found:" + user);
+				} else {
+					logger.info("No User found with email=" + email);
+				}
+			} finally {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public User getByEmailAndPassword(String email, String password) {
+		String query = "select * from Users where email = ? and password = ?";
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			resultSet = preparedStatement.executeQuery();
+			try {
+				if (resultSet.next()) {
+					user = new User(resultSet.getString("userName"),
+							resultSet.getString("password"));
+					user.setUserID(resultSet.getInt("userID"));
+					user.setEmail(email);
+					logger.info("User Found:" + user);
+				} else {
+					logger.info("No User found");
+				}
+			} finally {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public User getByNameAndPassword(String name, String password) {
+		String query = "select * from Users where userName = ? and password = ?";
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, password);
+			resultSet = preparedStatement.executeQuery();
+			try {
+				if (resultSet.next()) {
+					user = new User(resultSet.getString("userName"),
+							resultSet.getString("password"));
+					user.setUserID(resultSet.getInt("userID"));
+					user.setEmail(resultSet.getString("email"));
+					logger.info("User Found:" + user);
+				} else {
+					logger.info("No User found");
 				}
 			} finally {
 				resultSet.close();
@@ -142,7 +260,9 @@ public class UserDAOjdbcImpl implements UserDAO {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, user.getUserName());
-			preparedStatement.setString(2, user.getPassword());
+			String hashedPassword = HashedPassword.encodePassword(user
+					.getPassword());
+			preparedStatement.setString(2, hashedPassword);
 			preparedStatement.setString(3, user.getEmail());
 			preparedStatement.setDate(4, (Date) user.getBirthDate());
 			preparedStatement.setString(5, user.getSex());
@@ -163,6 +283,30 @@ public class UserDAOjdbcImpl implements UserDAO {
 			}
 		}
 	}
+
+	// @Override
+	// public void updateToken(String name, String token) {
+	// String query = "UPDATE Users SET authToken = ? where userName = ? ";
+	// Connection connection = null;
+	// PreparedStatement preparedStatement = null;
+	// try {
+	// connection = dataSource.getConnection();
+	// preparedStatement = connection.prepareStatement(query);
+	// preparedStatement.setString(1, token);
+	// preparedStatement.setString(2, name);
+	// // call executeUpdate to execute our sql update statement
+	// preparedStatement.executeUpdate();
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// try {
+	// preparedStatement.close();
+	// connection.close();
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
 	@Override
 	public void delete(int id) {
