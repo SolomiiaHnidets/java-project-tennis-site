@@ -9,4 +9,7 @@ public interface UserService extends Service<User> {
 
 	@Override
 	List<User> getAll();
+
+	@Override
+	void add(User user);
 }

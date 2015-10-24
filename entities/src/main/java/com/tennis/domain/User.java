@@ -39,19 +39,8 @@ public class User {
 	@Column(name = "sex")
 	private String sex;
 
-	@Column(name = "authToken")
-	private String authToken;
-
 	public int getUserID() {
 		return userID;
-	}
-
-	public String getAuthToken() {
-		return authToken;
-	}
-
-	public void setAuthToken(String authToken) {
-		this.authToken = authToken;
 	}
 
 	public void setUserID(int userID) {
