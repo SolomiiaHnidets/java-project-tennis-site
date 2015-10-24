@@ -1,5 +1,7 @@
 package com.tennis.configuration;
 
+import com.tennis.authentication.AuthenticationService;
+import com.tennis.authentication.AuthenticationServiceImpl;
 import com.tennis.persistance.*;
 import com.tennis.persistance.user.UserDAO;
 import com.tennis.persistance.user.UserDAOjdbcImpl;
@@ -50,6 +52,11 @@ public class Config {
 	@Bean
 	public UserService userService() {
 		return new UserServiceImpl();
+	}
+
+	@Bean
+	public AuthenticationService authenticationService() {
+		return new AuthenticationServiceImpl();
 	}
 
 }

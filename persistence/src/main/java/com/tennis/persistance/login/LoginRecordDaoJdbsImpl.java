@@ -3,6 +3,7 @@ package com.tennis.persistance.login;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.User;
 import com.tennis.persistance.user.UserDAOjdbcImpl;
 
@@ -75,10 +77,61 @@ public class LoginRecordDaoJdbsImpl implements LoginRecordDao {
 			}
 		}
 	}
-	@Override
-	public void updateToken(String name, String token) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public AuthorizationToken getLoginRecord(String authToken) {
+		String query = "select * from athorization_token where token = ?";
+		AuthorizationToken loginRecord = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, authToken);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			try {
+				if (resultSet.next()) {
+					loginRecord = new AuthorizationToken();
+					loginRecord.setToken(authToken);
+					loginRecord.setUserID(resultSet.getInt("userID"));
+				}
+			} finally {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return loginRecord;
+	}
+
+	@Override
+	public void deleteToken(AuthorizationToken authToken) {
+		String query = "delete from athorization_token where userID = ? and token = ?";
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, authToken.getUserID());
+			preparedStatement.setString(2, authToken.getToken());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

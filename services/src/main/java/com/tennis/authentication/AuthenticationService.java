@@ -1,7 +1,7 @@
 package com.tennis.authentication;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public interface AuthenticationService {
+
+	String authentication(String username, String password) throws Exception;
+	void logoutUser(String authToken);
 }

@@ -14,17 +14,4 @@ public class AuthenticationServiceTest {
 	// @Autowired
 	AuthenticationServiceImpl authenticationService = new AuthenticationServiceImpl();
 
-	@Test
-	public void testAuthentication() {
-		String token = null;
-		try {
-			// token = authenticationService.authentication("uranfgh21",
-			// "passwfgord");
-			authenticationService.loadUser("uranfgh21", "passwfgord");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(token);
-	}
 }

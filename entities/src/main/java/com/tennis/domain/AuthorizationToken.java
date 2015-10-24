@@ -6,6 +6,22 @@ import javax.persistence.*;
 @Table(name = "athorization_token")
 public class AuthorizationToken {
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
 	// private final static Integer DEFAULT_TIME_TO_LIVE_IN_SECONDS = (60 * 60 *
 	// 24 * 30); // 30
 	// // Days
@@ -21,5 +37,5 @@ public class AuthorizationToken {
 
 	@JoinColumn(name = "Users", referencedColumnName = "userID")
 	@Column(name = "userID")
-	private String userID;
+	private int userID;
 }

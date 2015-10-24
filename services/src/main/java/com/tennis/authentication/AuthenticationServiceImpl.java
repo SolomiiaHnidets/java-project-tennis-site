@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tennis.configuration.Config;
+import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.User;
 import com.tennis.persistance.login.LoginRecordDao;
 import com.tennis.persistance.user.UserDAO;
@@ -13,8 +15,9 @@ import com.tennis.util.*;
 
 @Service
 @Component
+@Transactional
 @ContextConfiguration(classes = Config.class)
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
 	private static final String AT_CHARACTER = "@";
 
@@ -24,17 +27,17 @@ public class AuthenticationServiceImpl {
 	@Autowired
 	public LoginRecordDao loginRecord;
 
+	@Override
 	public String authentication(String username, String password)
 			throws Exception {
 		User user = loadUser(username, password);
 		String authToken = TokenUtil.generateRandomToken();
 		loginRecord.saveToken(user.getUserID(), authToken);
-		// authorizationTokensStorage.put(username, authToken);
 		return authToken;
 	}
 
 	// Loads user by userName/password or email/password credentials.
-	public User loadUser(String username, String password) throws Exception {
+	private User loadUser(String username, String password) throws Exception {
 		User user = null;
 		// check if user typed email address
 		if (username.contains(AT_CHARACTER)) {
@@ -63,5 +66,16 @@ public class AuthenticationServiceImpl {
 		// throw new UserLockedException("User account is locked");
 		// }
 		return user;
+	}
+
+	@Override
+	public void logoutUser(String authToken) {
+		AuthorizationToken login = loginRecord.getLoginRecord(authToken);
+		if (login != null) {
+			loginRecord.deleteToken(login);
+		}
+		// else {
+		// throw new NotLoggedinUserException();
+		// }
 	}
 }
