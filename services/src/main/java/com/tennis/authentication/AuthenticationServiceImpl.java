@@ -28,12 +28,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	public LoginRecordDao loginRecord;
 
 	@Override
-	public String authentication(String username, String password)
+	public AuthorizationToken authentication(String username, String password)
 			throws Exception {
 		User user = loadUser(username, password);
-		String authToken = TokenUtil.generateRandomToken();
-		loginRecord.saveToken(user.getUserID(), authToken);
-		return authToken;
+		AuthorizationToken userToken = new AuthorizationToken();
+		userToken.setToken(TokenUtil.generateRandomToken());
+		userToken.setUserID(user.getUserID());
+		loginRecord.saveToken(userToken);
+		return userToken;
 	}
 
 	// Loads user by userName/password or email/password credentials.

@@ -4,7 +4,7 @@ import com.tennis.domain.AuthorizationToken;
 
 public interface LoginRecordDao {
 
-	void saveToken(Integer userID, String authToken);
+	void saveToken(AuthorizationToken authToken);
 
 	AuthorizationToken getLoginRecord(String authToken);
 

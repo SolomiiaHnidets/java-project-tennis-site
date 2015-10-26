@@ -49,7 +49,7 @@ public class LoginRecordDaoJdbsImpl implements LoginRecordDao {
 	// }
 
 	@Override
-	public void saveToken(Integer userID, String authToken) {
+	public void saveToken(AuthorizationToken authToken) {
 		String query = "insert into athorization_token (userID, token) "
 				+ "values (?, ?)";
 		Connection connection = null;
@@ -58,8 +58,8 @@ public class LoginRecordDaoJdbsImpl implements LoginRecordDao {
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, userID);
-			preparedStatement.setString(2, authToken);
+			preparedStatement.setInt(1, authToken.getUserID());
+			preparedStatement.setString(2, authToken.getToken());
 			numberOfInsertedRows = preparedStatement.executeUpdate();
 			if (numberOfInsertedRows == 0) {
 				logger.info("Rows did not inserted!");

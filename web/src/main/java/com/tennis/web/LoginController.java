@@ -1,10 +1,14 @@
 package com.tennis.web;
 
+import static com.tennis.authentication.BaseAuthentication.AUTH_TOKEN_HEADER_NAME;
+
 import com.tennis.authentication.AuthenticationService;
 import com.tennis.configuration.Config;
+import com.tennis.domain.AuthorizationToken;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,33 +21,27 @@ public class LoginController {
 
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
-	// Tells the application context to inject an instance of UserService here
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ResponseEntity<String> getAll() {
-		System.out.println("New request");
-		logger.info("Calling user controller");
-		return new ResponseEntity<String>("Some data", HttpStatus.OK);
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<String> authentication(
+	public ResponseEntity<AuthorizationToken> authentication(
 			@RequestParam("password") String password,
 			@RequestParam("login") String login) {
-		String token = null;
+		AuthorizationToken token = null;
 		HttpStatus code;
+		HttpHeaders headers = new HttpHeaders();
 		logger.info("Calling loger controller");
 		try {
 			token = authenticationService.authentication(login, password);
 			logger.info("Log in");
-			code = HttpStatus.OK;
+			code = HttpStatus.CREATED;
+			headers.add(AUTH_TOKEN_HEADER_NAME, token.getToken());
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("Authentification failed");
 			code = HttpStatus.NETWORK_AUTHENTICATION_REQUIRED;
 		}
-		return new ResponseEntity<String>(token, code);
+		return new ResponseEntity<AuthorizationToken>(token, headers, code);
 	}
 }
