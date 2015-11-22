@@ -24,7 +24,7 @@ public class LoginController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<AuthorizationToken> authentication(
 			@RequestParam("password") String password,
 			@RequestParam("login") String login) {
