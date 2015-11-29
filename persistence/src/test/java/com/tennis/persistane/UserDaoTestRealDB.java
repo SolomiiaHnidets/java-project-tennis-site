@@ -1,4 +1,4 @@
-package com.tennis;
+package com.tennis.persistane;
 
 import com.tennis.configuration.*;
 import com.tennis.domain.User;
@@ -60,6 +60,7 @@ public class UserDaoTestRealDB {
 	@Test
 	public void testGetById() {
 		User user = userDAO.getById(USER_ID);
+		// TODO
 		System.out.println(user);
 	}
 

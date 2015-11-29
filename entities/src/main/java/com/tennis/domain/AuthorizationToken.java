@@ -25,7 +25,6 @@ public class AuthorizationToken {
 	// private final static Integer DEFAULT_TIME_TO_LIVE_IN_SECONDS = (60 * 60 *
 	// 24 * 30); // 30
 	// // Days
-	@Id
 	@Column(length = 36, name = "token", unique = true, nullable = false)
 	private String token;
 
@@ -35,7 +34,8 @@ public class AuthorizationToken {
 	// @Column(name = "expirationDate")
 	// private Date expirationDate;
 
-	@JoinColumn(name = "Users", referencedColumnName = "userID")
+	@Id
+	@JoinColumn(name = "Users", referencedColumnName = "userID", unique = true, nullable = false)
 	@Column(name = "userID")
 	private int userID;
 }

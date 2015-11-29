@@ -1,4 +1,4 @@
-package com.tennis;
+package com.tennis.persistane;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

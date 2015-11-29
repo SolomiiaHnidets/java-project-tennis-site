@@ -1,19 +1,11 @@
 package com.tennis.persistance.login;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.tennis.domain.AuthorizationToken;
-import com.tennis.domain.User;
 import com.tennis.persistance.user.UserDAOjdbcImpl;
 
 @Component

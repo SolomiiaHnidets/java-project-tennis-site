@@ -1,4 +1,4 @@
-package com.tennis;
+package com.tennis.persistane;
 
 import com.tennis.configuration.Config;
 import com.tennis.domain.User;

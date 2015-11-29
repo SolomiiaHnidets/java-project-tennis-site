@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -12,6 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tennis.authentication.AuthenticationService;
 import com.tennis.authentication.AuthenticationServiceImpl;
 import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.User;
@@ -22,7 +24,7 @@ import com.tennis.domain.User;
 public class AuthenticationServiceTest {
 
 	@Mock
-	AuthenticationServiceImpl authenticationService;
+	AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
 	private static final String USER_NAME = "solomiya";
 	private static final String PASSWORD = "password";
@@ -45,25 +47,18 @@ public class AuthenticationServiceTest {
 		return user;
 	}
 
-	private String getJson(Object obj) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		String str = mapper.writeValueAsString(obj);
-		return str;
-	}
-
 	@Test
-	public void testLoginSuccess() throws Exception {
+	public void testAuthenticationSuccess() throws Exception {
+
 		AuthorizationToken expected = new AuthorizationToken();
 		User userDto = createUserDto();
 		expected.setToken(TEST_TOKEN);
 		expected.setUserID(userDto.getUserID());
-		String expectedStr = getJson(expected);
 
 		when(authenticationService.authentication(USER_NAME, PASSWORD))
 				.thenReturn(expected);
+		assertEquals(expected,
+				authenticationService.authentication(USER_NAME, PASSWORD));
 
-		getJson(
-				authenticationService.authentication(userDto.getUserName(),
-						userDto.getPassword())).equals(expectedStr);
 	}
 }

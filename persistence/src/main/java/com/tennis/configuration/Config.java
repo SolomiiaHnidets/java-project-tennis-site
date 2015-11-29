@@ -1,9 +1,7 @@
 package com.tennis.configuration;
 
-import com.tennis.persistance.*;
-import com.tennis.persistance.user.UserDAO;
-import com.tennis.persistance.user.UserDAOjdbcImpl;
-import com.tennis.persistance.user.UserHibernateImpl;
+import com.tennis.persistance.login.*;
+import com.tennis.persistance.user.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -43,5 +41,10 @@ public class Config {
 	@Bean
 	public UserDAO userHibernate() {
 		return new UserHibernateImpl();
+	}
+
+	@Bean
+	public LoginRecordDao login() {
+		return new LoginRecordDaoJdbsImpl();
 	}
 }
