@@ -1,30 +1,36 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
+import javax.security.sasl.AuthenticationException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.mock.web.MockServletContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tennis.authentication.AuthenticationService;
 import com.tennis.authentication.AuthenticationServiceImpl;
+import com.tennis.configuration.Config;
 import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.User;
+import com.tennis.persistance.user.UserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MockServletContext.class)
-@WebAppConfiguration
+@ContextConfiguration(classes = Config.class)
 public class AuthenticationServiceTest {
 
 	@Mock
 	AuthenticationService authenticationService = new AuthenticationServiceImpl();
+
+	@Autowired
+	@InjectMocks
+	private UserDAO userDAO;
 
 	private static final String USER_NAME = "solomiya";
 	private static final String PASSWORD = "password";
@@ -49,7 +55,6 @@ public class AuthenticationServiceTest {
 
 	@Test
 	public void testAuthenticationSuccess() throws Exception {
-
 		AuthorizationToken expected = new AuthorizationToken();
 		User userDto = createUserDto();
 		expected.setToken(TEST_TOKEN);
@@ -59,6 +64,25 @@ public class AuthenticationServiceTest {
 				.thenReturn(expected);
 		assertEquals(expected,
 				authenticationService.authentication(USER_NAME, PASSWORD));
+	}
+
+	@Test
+	public void testAuthenticationByEmail() throws Exception {
+		User userDto = createUserDto();
+		// User by email
+		when(userDAO.getByEmail("someemail@")).thenReturn(userDto);
+		try {
+			authenticationService.authentication("someemail@", PASSWORD);
+			assertTrue(true);
+		} catch (AuthenticationException e) {
+			assertTrue(false);
+		}
+		// try {
+		// authService.loginUser("test2@", USER_PASSWORD, TENANT_CODE);
+		// assertTrue(false);
+		// } catch (AuthenticationException e) {
+		// assertTrue(true);
+		// }
 
 	}
 }

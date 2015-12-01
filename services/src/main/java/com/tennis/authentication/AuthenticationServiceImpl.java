@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tennis.common.exception.AuthenticationException;
 import com.tennis.configuration.Config;
 import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.User;
@@ -47,10 +48,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			if (user != null) {
 				if (!PasswordEncoder.isMatchPassword(password,
 						user.getPassword())) {
-					throw new Exception("Bad password");
+					throw new AuthenticationException("Bad password");
 				}
 			} else {
-				throw new Exception("Bad credentials");
+				throw new AuthenticationException("Bad credentials");
 			}
 			// check if user typed login
 		} else {
@@ -58,10 +59,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			if (user != null) {
 				if (!PasswordEncoder.isMatchPassword(password,
 						user.getPassword())) {
-					throw new Exception("Bad password");
+					throw new AuthenticationException("Bad password");
 				}
 			} else {
-				throw new Exception("Bad credentials");
+				throw new AuthenticationException("Bad credentials");
 			}
 		}
 		// if (user.isLocked() || user.isDeleted()) {

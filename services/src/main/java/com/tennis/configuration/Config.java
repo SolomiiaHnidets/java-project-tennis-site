@@ -1,5 +1,6 @@
 package com.tennis.configuration;
 
+import com.tennis.authentication.AuthenticationService;
 import com.tennis.authentication.AuthenticationServiceImpl;
 import com.tennis.persistance.login.LoginRecordDao;
 import com.tennis.persistance.login.LoginRecordDaoJdbsImpl;
@@ -10,6 +11,7 @@ import com.tennis.persistance.user.UserHibernateImpl;
 import org.springframework.context.annotation.*;
 
 @Configuration
+@PropertySource("classpath:/user.properties")
 public class Config {
 
 	@Bean
@@ -22,6 +24,10 @@ public class Config {
 		return new UserHibernateImpl();
 	}
 
+	// @Bean
+	// public AuthenticationService authenticationService() {
+	// return new AuthenticationServiceImpl();
+	// }
 	// @Bean
 	// public AuthenticationServiceImpl authenticationService() {
 	// return new AuthenticationServiceImpl();
