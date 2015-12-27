@@ -10,15 +10,19 @@ import com.tennis.user.UserService;
 import com.tennis.user.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebMvc
+@ComponentScan
 @PropertySource("classpath:/user.properties")
-public class Config {
+public class Config extends WebMvcAutoConfiguration{
 
 	@Autowired
 	private Environment environment;
