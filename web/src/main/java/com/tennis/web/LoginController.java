@@ -44,4 +44,11 @@ public class LoginController {
 		}
 		return new ResponseEntity<AuthorizationToken>(token, headers, code);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/fake", method = RequestMethod.GET)
+	public String fakeEndpoint(/*@RequestParam String username, @RequestParam String password*/){
+		System.out.println("In endpoint");
+		return "Ok=)";
+	}
 }
