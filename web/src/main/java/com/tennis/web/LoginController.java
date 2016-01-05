@@ -47,8 +47,12 @@ public class LoginController {
 
 	@ResponseBody
 	@RequestMapping(value = "/fake", method = RequestMethod.GET)
-	public String fakeEndpoint(/*@RequestParam String username, @RequestParam String password*/){
-		System.out.println("In endpoint");
-		return "Ok=)";
+	public ResponseEntity<HttpStatus> fakeEndpoint(// @RequestParam String login
+	) {
+		// @RequestParam String password) {
+		HttpStatus code = HttpStatus.OK;
+		System.out.println("In endpoint " + code);
+		// System.out.println(login);
+		return new ResponseEntity<HttpStatus>(code);
 	}
 }
