@@ -1,7 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/mystyle.css">
-<script src="/javaScript/login.js" type="text/javascript"></script>
+<script src="/javaScript/authentication_ajax_request.js" type="text/javascript"></script>
 
 <!-- Download the latest minified version of jQuery -->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

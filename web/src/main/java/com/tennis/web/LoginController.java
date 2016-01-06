@@ -24,7 +24,8 @@ public class LoginController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value = "/authentication", method = RequestMethod.POST)
 	public ResponseEntity<AuthorizationToken> authentication(
 			@RequestParam("password") String password,
 			@RequestParam("login") String login) {
@@ -46,13 +47,13 @@ public class LoginController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/fake", method = RequestMethod.GET)
-	public ResponseEntity<HttpStatus> fakeEndpoint(// @RequestParam String login
-	) {
+	@RequestMapping(value = "/fake", method = RequestMethod.POST)
+	public ResponseEntity<HttpStatus> fakeEndpoint(@RequestParam String login,
+			@RequestParam("password") String password) {
 		// @RequestParam String password) {
 		HttpStatus code = HttpStatus.OK;
 		System.out.println("In endpoint " + code);
-		// System.out.println(login);
+		System.out.println(login);
 		return new ResponseEntity<HttpStatus>(code);
 	}
 }
