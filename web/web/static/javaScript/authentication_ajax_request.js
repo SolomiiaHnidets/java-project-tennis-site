@@ -15,7 +15,7 @@ function login_func() {
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		var handleResponse = function(status, response) {
-			alert("response")
+			alert(response)
 		}
 		var handleStateChange = function() {
 			switch (xmlhttp.readyState) {
