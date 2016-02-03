@@ -26,7 +26,10 @@ function login_func() {
 			case 3: // INTERACTIVE
 				break;
 			case 4: // COMPLETED
-				window.location = base_url + "video.html";
+				// jQuery
+				xmlhttp.abort();
+				get_video_func();
+				//window.location = base_url + "video.html";
 				//handleResponse(xmlhttp.status, xmlhttp.responseText);
 				break;
 			default:

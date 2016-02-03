@@ -17,5 +17,6 @@
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <mapping class="com.tennis.domain.User"></mapping>
         <mapping class="com.tennis.domain.AuthorizationToken"></mapping>
+        <mapping class="com.tennis.domain.VideoCatalog"></mapping>
     </session-factory>
 </hibernate-configuration>
