@@ -1,10 +1,11 @@
 function login_func() {
+	var base_url = 'http://localhost:8080/';
 	// var myForm = document.getElementById("auth_form");
 	var login = document.getElementById("login").value;
 	var password = document.getElementById("password").value;
 
 	if ((login != "") && (password != "")) {
-		var url = 'http://localhost:8080/login/authentication';
+		var url = base_url + 'login/authentication';
 		var params = "login=" + login + "&password=" + password;
 		var result;
 		var response;
@@ -25,7 +26,8 @@ function login_func() {
 			case 3: // INTERACTIVE
 				break;
 			case 4: // COMPLETED
-				handleResponse(xmlhttp.status, xmlhttp.responseText);
+				window.location = base_url + "video.html";
+				//handleResponse(xmlhttp.status, xmlhttp.responseText);
 				break;
 			default:
 				alert("error");
