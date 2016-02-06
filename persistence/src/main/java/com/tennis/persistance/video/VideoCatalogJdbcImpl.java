@@ -1,22 +1,17 @@
 package com.tennis.persistance.video;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.sql.DataSource;
-
+import com.tennis.domain.VideoCatalog;
+import com.tennis.persistance.user.UserDAOjdbcImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.tennis.domain.VideoCatalog;
-import com.tennis.persistance.user.UserDAOjdbcImpl;
+import javax.sql.DataSource;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Component
+//@Component
 public class VideoCatalogJdbcImpl implements VideoCatalogDAO {
 	private static final Logger logger = Logger
 			.getLogger(UserDAOjdbcImpl.class);

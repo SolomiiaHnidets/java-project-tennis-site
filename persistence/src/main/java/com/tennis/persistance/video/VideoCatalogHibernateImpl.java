@@ -6,7 +6,10 @@ import org.hibernate.Query;
 
 import com.tennis.domain.VideoCatalog;
 import com.tennis.persistance.AbstractHibernateDaoImpl;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
+@Component
 public class VideoCatalogHibernateImpl extends AbstractHibernateDaoImpl
 		implements
 			VideoCatalogDAO {

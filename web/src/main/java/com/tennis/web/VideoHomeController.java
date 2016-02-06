@@ -2,6 +2,7 @@ package com.tennis.web;
 
 import com.tennis.configuration.Config;
 import com.tennis.domain.VideoCatalog;
+import com.tennis.persistance.video.VideoCatalogDAO;
 import com.tennis.persistance.video.VideoCatalogJdbcImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class VideoHomeController {
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired
-	private VideoCatalogJdbcImpl videos;
+	private VideoCatalogDAO videos;
 
 	@ResponseBody
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
