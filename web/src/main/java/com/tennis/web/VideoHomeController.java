@@ -1,24 +1,17 @@
 package com.tennis.web;
 
-import static com.tennis.authentication.BaseAuthentication.AUTH_TOKEN_HEADER_NAME;
-
 import com.tennis.configuration.Config;
-import com.tennis.domain.AuthorizationToken;
 import com.tennis.domain.VideoCatalog;
-import com.tennis.persistance.video.VideoCatalogHibernateImpl;
 import com.tennis.persistance.video.VideoCatalogJdbcImpl;
-import com.tennis.user.UserService;
-import com.tennis.user.UserServiceImpl;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.tennis.authentication.BaseAuthentication.*;
 
 @RestController
 @ContextConfiguration(classes = Config.class)
@@ -27,12 +20,14 @@ public class VideoHomeController {
 
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
+	@Autowired
+	private VideoCatalogJdbcImpl videos;
+
 	@ResponseBody
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ResponseEntity<List<VideoCatalog>> getAllUsers(
-			@RequestParam("token") String userToken) {
+			@RequestParam(required = false, name = "token") String userToken) {
 		logger.info("Calling video controller");
-		VideoCatalogJdbcImpl videos = new VideoCatalogJdbcImpl();
 		HttpStatus code;
 		HttpHeaders headers = new HttpHeaders();
 		List<VideoCatalog> catalog = videos.getAll();
