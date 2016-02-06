@@ -27,7 +27,7 @@ public class VideoHomeController {
 	@ResponseBody
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ResponseEntity<List<VideoCatalog>> getAllUsers(
-			@RequestParam(required = false, name = "token") String userToken) {
+			@RequestHeader(name = "token") String userToken) {
 		logger.info("Calling video controller");
 		HttpStatus code;
 		HttpHeaders headers = new HttpHeaders();
