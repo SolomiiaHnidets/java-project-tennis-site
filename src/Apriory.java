@@ -112,10 +112,13 @@ public class Apriory {
 	public void GetMaximalItemsets(List<Transaction> transactions, int support) {
 		List<Integer> items = Apriory.GetFrequent_1Itemsets(transactions,
 				support);
-		int itemCount = 2; // indicate count of elements in pair
+		int itemCount = 3; // indicate count of elements in pair
 		Boolean flag = true;
 		while (flag) {// items.size() > 1) {
-			List<Transaction> combination = GenerareCandidates(items, itemCount);
+			// List<Transaction> combination = GenerareCandidates(items,
+			// itemCount);
+			List<Transaction> combination = printCombination(items,
+					items.size(), itemCount);
 			RemoveNotFrequent(combination, transactions, support);
 			flag = false;
 		}
@@ -136,13 +139,7 @@ public class Apriory {
 		Transaction itemList;
 		for (Integer firstItem : items) {
 			for (Integer secondItem : items) {
-				if ((combinationLength == 2 && firstItem < secondItem)
-				// ||
-				// (combinationLength > 2 && firstItem.equals(secondItem)&&
-				// firstItem.substring(0, combinationLength - 2) == secondItem
-				//
-				// .Substring(0, combinationLength - 2))
-				) {
+				if ((combinationLength == 2 && firstItem < secondItem)) {
 					// String FinalItem;
 					combination = new ArrayList<Integer>();
 					combination.add(firstItem);
@@ -151,21 +148,6 @@ public class Apriory {
 					// FinalItem = firstItem
 					// + secondItem.Substring(combinationLength - 2);
 					Boolean flag = true;
-					// if (combinationLength > 2) {
-					// int index = 0;
-					// for (int i = 0; i < FinalItem.Length; i++) {
-					// if (Lk.Contains(FinalItem.Substring(0, index)
-					// + FinalItem.Substring(index + 1)) == false) {
-					// flag = false;
-					// break;
-					// }
-					// index++;
-					// }
-					// }
-					// for (Integer item : combination) {
-					// System.out.print(item);
-					// System.out.print(" ");
-					// }
 					if (flag == true && !combination.isEmpty()) {
 						itemList.setTransaction(combination);
 						candidateSets.add(itemList);
@@ -179,6 +161,58 @@ public class Apriory {
 		// }
 		return candidateSets;
 	}
+
+	// ----------------------------
+	/*
+	 * arr[] ---> Input Array data[] ---> Temporary array to store current
+	 * combination start & end ---> Staring and Ending indexes in arr[] index
+	 * ---> Current index in data[] r ---> Size of a combination to be printed
+	 */
+	static void combinationUtil(List<Integer> arr, List<Integer> data,
+			int start, int end, int index, int r,
+			List<Transaction> candidateSets) {
+		Transaction itemList;
+		List<Integer> combination;
+		// Current combination is ready to be printed, print it
+		if (index == r) {
+			combination = new ArrayList<Integer>();
+			for (int j = 0; j < r; j++) {
+				// System.out.print(data.get(j) + " ");
+				combination.add(data.get(j));
+			}
+			System.out.println("");
+			itemList = new Transaction();
+			itemList.setTransaction(combination);
+			candidateSets.add(itemList);
+			return;
+		}
+
+		// replace index with all possible elements. The condition
+		// "end-i+1 >= r-index" makes sure that including one element
+		// at index will make a combination with remaining elements
+		// at remaining positions
+		for (int i = start; i <= end && end - i + 1 >= r - index; i++) {
+			data.add(index, arr.get(i));
+			combinationUtil(arr, data, i + 1, end, index + 1, r, candidateSets);
+		}
+	}
+
+	// The main function that prints all combinations of size r
+	// in arr[] of size n. This function mainly uses combinationUtil()
+	private List<Transaction> printCombination(List<Integer> arr, int n, int r) {
+		List<Transaction> candidateSets = new ArrayList<Transaction>();
+		// A temporary array to store all combination one by one
+		List<Integer> data = new ArrayList<Integer>();
+
+		// Print all combination using temprary array 'data[]'
+		combinationUtil(arr, data, 0, n - 1, 0, r, candidateSets);
+		for (Transaction transact : candidateSets) {
+			transact.print();
+			System.out.println(" tran ");
+		}
+		return candidateSets;
+	}
+	// ---------------------------------
 
 	// remove that pairs that has support< min_support
 	private List<Transaction> RemoveNotFrequent(List<Transaction> combination,
