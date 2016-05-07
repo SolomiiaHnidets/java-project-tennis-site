@@ -16,6 +16,7 @@ function login_func() {
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		var handleResponse = function(status, response) {
+			var responseFromCar = xmlhttp.responseText;
 			alert(response)
 		}
 		var handleStateChange = function() {
@@ -27,8 +28,16 @@ function login_func() {
 				break;
 			case 4: // COMPLETED
 				// jQuery
+				var strJSON = xmlhttp.responseText;
+				//alert(data);
+				var obj =  JSON.parse(strJSON);
+				var token = obj.token;
+				//alert(obj.token);
 				xmlhttp.abort();
-				get_video_func();
+				var proceed = true;
+				if(proceed) { //everything looks good
+					get_video_func(token);
+				}
 				//window.location = base_url + "video.html";
 				//handleResponse(xmlhttp.status, xmlhttp.responseText);
 				break;
