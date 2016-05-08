@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @ContextConfiguration(classes = Config.class)
 public class LoginController {
 
-	private static final Logger logger = Logger.getLogger(UserController.class);
+	private static final Logger logger = Logger.getLogger(LoginController.class);
 
 	@Autowired
 	private AuthenticationService authenticationService;
@@ -32,7 +32,7 @@ public class LoginController {
 		AuthorizationToken token = null;
 		HttpStatus code;
 		HttpHeaders headers = new HttpHeaders();
-		logger.info("Calling loger controller");
+		logger.info("Calling logger controller");
 		try {
 			token = new AuthorizationToken();//authenticationService.authentication(login, password);
 			token.setToken("123456");
@@ -41,7 +41,7 @@ public class LoginController {
 			headers.add(AUTH_TOKEN_HEADER_NAME, token.getToken());
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("Authentification failed");
+			logger.info("Authentication failed");
 			code = HttpStatus.NETWORK_AUTHENTICATION_REQUIRED;
 		}
 		return new ResponseEntity<AuthorizationToken>(token, headers, code);

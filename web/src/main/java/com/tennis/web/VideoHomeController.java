@@ -25,7 +25,7 @@ public class VideoHomeController {
 	private VideoCatalogDAO videos;
 
 	@ResponseBody
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ResponseEntity<List<VideoCatalog>> getAllUsers(
 			@RequestHeader(name = "token") String userToken) {
 		logger.info("Calling video controller");
