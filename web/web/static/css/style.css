@@ -1,20 +1,10 @@
-/*
-Template Name: Clips
-Template URI: http://www.wpfreeware.com/clips/
-Author: WpFreeware
-Author URI: http://www.wpfreeware.com
-Description: A responsive video bloging html template
-Version: 1.0 
-License: GPL 2.0 & later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-*/
 
 
 *{margin:0;padding:0}
 body{font-family:Arial;font-size:14px;line-height:20px;background:#222;}
 a{text-decoration:none;outline:none;color:#000}
-a:hover,a:focus;a:active{text-decoration:none;outline:none;color:#000}
+a:hover,a:focus,a:active{text-decoration:none;outline:none;color:#000}
 input[type=text],input[type=password],textarea{border:1px solid #ddd;padding:5px}
 input[type=submit]
 h1,h2,h3,h4,h5,h6{font-weight:normal;margin:0 0 15px;}
@@ -274,3 +264,13 @@ margin-bottom: 25px;}
 
 .page_content p{font-size:120px;line-height:120px;text-align:center;font-family:bebasregular;}
 .page_content p span{font-size:80px;display:block;}
+.but1{
+	background-color: Transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	color: #FAB002;
+	display: block;
+	font-weight: bold;
+}

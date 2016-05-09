@@ -7,17 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/javaScript/return_catalog.js"></script>
     <script type="text/javascript" src="/javaScript/authentication_ajax_request.js"></script>
-    <script src="/javaScript/home_page_ajax_request.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/javaScript/home_page_ajax_request.js"></script>
+    <script type="text/javascript" src="/javaScript/monitoring_click.js"></script>
     <!-- bx slider-->
-    <link rel="stylesheet" href="css/jquery.bxslider.css">
-    <!-- Fonts-->
-    <link rel="stylesheet" href="fonts/HelveticaNeue/font.css">
-    <link rel="stylesheet" href="fonts/Bebas/font.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="css/style.css" rel="stylesheet" media="screen"
           type="text/css">
-    <link href="css/responsive.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <script type="text/javascript">
@@ -63,9 +57,9 @@
                     <div class="fix single_cat">
                         <iframe height="200" id="video_1" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
-
                         <div class="fix single_cat_meta">
-                            <a> SQL day in Poland</a>
+                            <button type="button" class="but1" id="video_number_1" onclick="onClickFunction(this.id)">This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -84,7 +78,8 @@
                         <iframe height="200" id="video_2" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
                         <div class="fix single_cat_meta">
-                            <a>This is title from video</a>
+                            <button type="button" class="but1" onclick="onClickFunction(this.id)" id="video_number_2">This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -103,7 +98,8 @@
                         <iframe height="200" id="video_3" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
                         <div class="fix single_cat_meta">
-                            <a id="title_3">ghj</a>
+                            <button type="button" class="but1" onclick="onClickFunction(this.id)"  id="video_number_3">This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -122,7 +118,8 @@
                         <iframe height="200" id="video_4" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
                         <div class="fix single_cat_meta">
-                            <a>This is title from video</a>
+                            <button type="button" class="but1" onclick="onClickFunction(this.id)"  id="video_number_4">This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -141,7 +138,8 @@
                         <iframe height="200" id="video_5" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
                         <div class="fix single_cat_meta">
-                            <a>This is title from video</a>
+                            <button type="button" class="but1" onclick="onClickFunction(this.id)"  id="video_number_5">This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -160,7 +158,8 @@
                         <iframe height="200" id="video_6" frameborder="0" allowfullscreen></iframe>
                         <div class="play-small"></div>
                         <div class="fix single_cat_meta">
-                            <a>This is title from video</a>
+                            <button type="button" class="but1" id="video_number_6" onclick="onClickFunction(this.id)" >This is title from video</button>
+                            <!--<a href="#" id="open">Open</a>-->
                             <div class="fix">
                                 <p class="floatleft">3 days ago</p>
                                 <p class="floatright">7854 views</p>
@@ -376,7 +375,6 @@
 
         <div class="fix pagination">
             <a href="">1</a> <a href="">2</a> <a href="">3</a> <a href="">4</a>
-            <a href="">5</a> <a href="">6</a> <a href="">7</a> <a href="">8</a>
             <a href=""> NEXT </a>
         </div>
     </div>
@@ -392,29 +390,6 @@
     </div>
 </div>
 
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/jquery.bxslider.min.js"></script>
-<script type="text/javascript">
-    $('.bxslider').bxSlider({
-        minSlides: 4,
-        maxSlides: 4,
-        slideWidth: 300,
-        slideMargin: 10,
-        captions: false,
-        pager: true,
-        auto: true,
-        controls: false
-    });
-</script>
-
-<script type="text/javascript" src="js/selectnav.min.js"></script>
-<script type="text/javascript">
-    selectnav('nav', {
-        label: '-Navigation-',
-        nested: true,
-        indent: '-'
-    });
-</script>
 
 </body>
 </html>
